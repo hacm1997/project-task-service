@@ -1,7 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Schema as MongooseSchema } from 'mongoose';
-import { Project } from './project.schema';
-import { User } from './user.shcema';
 
 export type TaskDocument = Task & Document;
 
@@ -18,22 +16,22 @@ export class Task {
 
   @Prop({
     required: true,
-    enum: ['todo', 'in-progress', 'completed'],
-    default: 'todo',
+    enum: ['all', 'in-progress', 'completed'],
+    default: 'all',
   })
   status: string;
 
   // Project relationship
   @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Project', required: true })
-  project: Project;
+  project: string;
 
   // User relationship
   @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'User', required: true })
-  assignedTo: User;
+  assignedTo: string;
 
   // Collaborators users (array)
   @Prop([{ type: MongooseSchema.Types.ObjectId, ref: 'User' }])
-  collaborators: User[];
+  collaborators: string[];
 
   @Prop({ default: Date.now })
   createdAt: Date;

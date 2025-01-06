@@ -14,13 +14,13 @@ export class Project {
   description: string;
 
   @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'User', required: true })
-  owner: string; // Usuario que creó el proyecto
+  owner: string; // User owner
 
   @Prop([{ type: MongooseSchema.Types.ObjectId, ref: 'User' }])
-  collaborators: string[]; // Usuarios asignados al proyecto
+  collaborators: string[]; // Ssers associated with this project
 
   @Prop([{ type: MongooseSchema.Types.ObjectId, ref: 'Task' }])
-  tasks: string[];
+  tasks: string[]; // Task associated with this project
 
   @Prop({ default: Date.now })
   createdAt: Date;

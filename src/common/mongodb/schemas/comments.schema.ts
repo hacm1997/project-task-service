@@ -18,8 +18,14 @@ export class Comment {
   @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'User', required: true })
   author: User;
 
+  @Prop({ required: true })
+  user_name: string;
+
   @Prop({ default: Date.now })
   createdAt: Date;
+
+  @Prop({ default: Date.now })
+  updatedAt: Date;
 }
 
 export const CommentSchema = SchemaFactory.createForClass(Comment);

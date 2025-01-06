@@ -1,4 +1,4 @@
-import { UserBase } from '../Models/Users/service/user.base';
+import { UserBase } from 'Modules/Users/service/user.base';
 
 describe('UserBase', () => {
   let user: UserBase;
