@@ -10,7 +10,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { UserService } from '../service/user.service';
-import { UserModelDto } from '../util/user.modelDto';
+import { UserModelDto, UserPreferencesDto } from '../util/user.modelDto';
 import { User } from 'src/common/mongodb/schemas/user.shcema';
 import { JwtAuthGuard } from 'Modules/Auth/utils/jwt-auth.guard';
 
@@ -50,5 +50,13 @@ export class UserController {
       data.currentPassword,
       data.newPassword,
     );
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Post('preferences')
+  public async getInfoUser(
+    @Body('email') email: string,
+  ): Promise<UserPreferencesDto> {
+    return this.userService.getUserPreferences(email);
   }
 }

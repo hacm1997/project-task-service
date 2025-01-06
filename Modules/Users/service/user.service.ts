@@ -5,7 +5,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { UserBase } from './user.base';
-import { UserModelDto } from '../util/user.modelDto';
+import { UserModelDto, UserPreferencesDto } from '../util/user.modelDto';
 import { UserRepository } from '../data/user.repository';
 import { User, UserDocument } from 'src/common/mongodb/schemas/user.shcema';
 import { cryptjsComparePassword } from 'src/utils/bcrypt.service';
@@ -30,6 +30,24 @@ export class UserService {
   async findByEmail(email: string): Promise<UserDocument | null> {
     try {
       return await this.userRepository.findByEmail(email);
+    } catch (error) {
+      console.error('Error finding user by email => ', error);
+      throw new NotFoundException('Error to get user');
+    }
+  }
+
+  async getUserPreferences(email: string): Promise<UserPreferencesDto> {
+    try {
+      const preferences = await this.userRepository.findByEmail(email);
+      const preferencesData: UserPreferencesDto = {
+        id: preferences._id.toString(),
+        email: preferences.email,
+        name: preferences.name,
+        role: preferences.role,
+        user_name: preferences.user_name,
+        details: preferences.details,
+      };
+      return preferencesData;
     } catch (error) {
       console.error('Error finding user by email => ', error);
       throw new NotFoundException('Error to get user');

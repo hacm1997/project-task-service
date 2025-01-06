@@ -54,6 +54,13 @@ export class ProjectController {
     }
   }
 
+  @Post('by-user-member')
+  async getByCollaborator(
+    @Body() data: { collaborators: string[] },
+  ): Promise<ProjectDocument[]> {
+    return this.projectService.getByCollaborators(data.collaborators);
+  }
+
   @Get('/:id')
   async getProjectById(@Param('id') id: string): Promise<ProjectBase> {
     return this.projectService.getProjectById(id);

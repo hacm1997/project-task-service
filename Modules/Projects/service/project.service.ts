@@ -42,6 +42,23 @@ export class ProjectService {
     return projects.map((project: ProjectDocument) => project);
   }
 
+  async getByCollaborators(
+    collaborators: string[],
+  ): Promise<ProjectDocument[] | []> {
+    try {
+      const projects =
+        await this.projectRepository.findAllByCollaborators(collaborators);
+      // Mapear los resultados a ProjectBase si es necesario
+      return projects.map((project: ProjectDocument) => project);
+    } catch (error) {
+      console.error(error);
+      throw new HttpException(
+        'Not found projects for the user',
+        HttpStatus.NOT_FOUND,
+      );
+    }
+  }
+
   // Método para obtener un proyecto por su ID
   async getProjectById(id: string): Promise<ProjectBase | null> {
     const project = await this.projectRepository.findById(id);

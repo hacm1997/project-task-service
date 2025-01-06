@@ -23,6 +23,14 @@ export class ProjectRepository {
     return this.projectModel.find().exec();
   }
 
+  async findAllByCollaborators(
+    collaborators: string[],
+  ): Promise<ProjectDocument[]> {
+    return this.projectModel
+      .find({ collaborators: { $in: collaborators } })
+      .exec();
+  }
+
   async findById(_id: string): Promise<ProjectDocument | null> {
     return this.projectModel.findOne({ _id }).exec();
   }
