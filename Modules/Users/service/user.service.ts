@@ -60,6 +60,7 @@ export class UserService {
     filters: {
       name?: string;
       role?: string;
+      email?: string;
       minReputation?: number;
     } = {},
   ): Promise<{

@@ -1,6 +1,7 @@
 export type UserQuery = Partial<{
   name: RegExp;
-  role: string;
+  role: RegExp;
+  email: RegExp;
   reputationPoints: { $gte: number };
 }>;
 

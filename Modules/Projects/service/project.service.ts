@@ -36,10 +36,25 @@ export class ProjectService {
     }
   }
 
-  async getAllProjects(): Promise<ProjectDocument[]> {
-    const projects = await this.projectRepository.findAll();
-    // Mapear los resultados a ProjectBase si es necesario
-    return projects.map((project: ProjectDocument) => project);
+  async getAllProjects(
+    page: number = 1,
+    limit: number = 10,
+    filters: {
+      name?: string;
+      description?: string;
+    } = {},
+  ): Promise<{
+    data: ProjectDocument[];
+    total: number;
+    page: number;
+    totalPages: number;
+  }> {
+    try {
+      return await this.projectRepository.findAll(page, limit, filters);
+    } catch (error) {
+      console.error('Error fetching projects:', error);
+      throw new HttpException('Projects not found', HttpStatus.NOT_FOUND);
+    }
   }
 
   async getByCollaborators(
@@ -147,6 +162,36 @@ export class ProjectService {
         'Error to update project',
         HttpStatus.BAD_REQUEST,
       );
+    }
+  }
+
+  async deleteProject(projectId: string): Promise<GeneralResponse> {
+    const project = await this.getProjectById(projectId);
+    if (project) {
+      try {
+        const prj = await this.projectRepository.deleteProject(projectId);
+        if (prj) {
+          try {
+            project.getTasks.forEach(async (task) => {
+              await this.taskService.removerById(task);
+            });
+          } catch (error) {
+            console.error('Error to delete task from project:', error);
+          }
+        }
+        return {
+          message: 'Project deleted successfully',
+          status: HttpStatus.OK,
+        };
+      } catch (error) {
+        console.error('Error to delete project:', error);
+        throw new HttpException(
+          'Error to delete project',
+          HttpStatus.BAD_REQUEST,
+        );
+      }
+    } else {
+      throw new HttpException('Project not found', HttpStatus.NOT_FOUND);
     }
   }
 

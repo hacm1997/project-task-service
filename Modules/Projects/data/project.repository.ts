@@ -7,6 +7,7 @@ import {
 import { ProjectBase } from '../service/project.base';
 import { HttpException, HttpStatus, NotFoundException } from '@nestjs/common';
 import { User, UserDocument } from 'src/common/mongodb/schemas/user.shcema';
+import { ProjectQuery } from '../util/project.types';
 
 export class ProjectRepository {
   constructor(
@@ -19,8 +20,36 @@ export class ProjectRepository {
     return createdProject.save();
   }
 
-  async findAll(): Promise<ProjectDocument[]> {
-    return this.projectModel.find().exec();
+  async findAll(
+    page: number = 1,
+    limit: number = 10,
+    filters: {
+      name?: string;
+      description?: string;
+    } = {},
+  ): Promise<{
+    data: ProjectDocument[];
+    total: number;
+    page: number;
+    totalPages: number;
+  }> {
+    const { name, description } = filters;
+
+    const query: ProjectQuery = {};
+    if (name) query.name = new RegExp(name, 'i');
+    if (description) query.description = new RegExp(description, 'i');
+
+    const total = await this.projectModel.countDocuments(query).exec();
+    const totalPages = Math.ceil(total / limit);
+    const skip = (page - 1) * limit;
+
+    const data = await this.projectModel
+      .find(query)
+      .skip(skip)
+      .limit(limit)
+      .exec();
+
+    return { data, total, page, totalPages };
   }
 
   async findAllByCollaborators(
@@ -135,5 +164,13 @@ export class ProjectRepository {
 
     project.updatedAt = new Date();
     await project.save();
+  }
+
+  async deleteProject(projectId: string): Promise<ProjectDocument> {
+    const project = await this.projectModel.findByIdAndDelete(projectId).exec();
+    if (!project) {
+      throw new HttpException('Project not found', HttpStatus.NOT_FOUND);
+    }
+    return project;
   }
 }

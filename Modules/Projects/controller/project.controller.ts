@@ -9,6 +9,8 @@ import {
   Put,
   HttpException,
   HttpStatus,
+  Query,
+  Delete,
 } from '@nestjs/common';
 import { ProjectService } from '../service/project.service';
 import { ProjectModelDto } from '../util/projectDto.model';
@@ -45,10 +47,29 @@ export class ProjectController {
   }
 
   @Get()
-  async getAllProjects(@Request() req): Promise<ProjectDocument[]> {
+  async getAllProjects(
+    @Request() req,
+    @Query('limit') limit: string,
+    @Query('page') page: string,
+    @Query('name') name: string,
+    @Query('description') description: string,
+  ): Promise<{
+    data: ProjectDocument[];
+    total: number;
+    page: number;
+    totalPages: number;
+  }> {
     const user: UserToClient = req.user;
+    const filter = {
+      name,
+      description,
+    };
     if (user.role === ROLE_1) {
-      return this.projectService.getAllProjects();
+      return this.projectService.getAllProjects(
+        Number(page),
+        Number(limit),
+        filter,
+      );
     } else {
       throw new HttpException('Unauthorized', HttpStatus.UNAUTHORIZED);
     }
@@ -142,6 +163,19 @@ export class ProjectController {
     const user: UserToClient = req.user;
     if (user.role === ROLE_1) {
       return this.projectService.removeTask(projectId, taskId);
+    } else {
+      throw new HttpException('Unauthorized', HttpStatus.UNAUTHORIZED);
+    }
+  }
+
+  @Delete('/:projectId')
+  async deleteProject(
+    @Request() req,
+    @Param('projectId') projectId: string,
+  ): Promise<GeneralResponse> {
+    const user: UserToClient = req.user;
+    if (user.role === ROLE_1) {
+      return this.projectService.deleteProject(projectId);
     } else {
       throw new HttpException('Unauthorized', HttpStatus.UNAUTHORIZED);
     }

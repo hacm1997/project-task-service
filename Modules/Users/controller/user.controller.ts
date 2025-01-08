@@ -2,17 +2,21 @@ import {
   Body,
   Controller,
   Get,
+  HttpException,
   HttpStatus,
   Param,
   Post,
   Put,
   Query,
+  Request,
   UseGuards,
 } from '@nestjs/common';
 import { UserService } from '../service/user.service';
 import { UserModelDto, UserPreferencesDto } from '../util/user.modelDto';
 import { User } from 'src/common/mongodb/schemas/user.shcema';
 import { JwtAuthGuard } from 'Modules/Auth/utils/jwt-auth.guard';
+import { ROLE_1 } from 'src/common/constants/const';
+import { UserToClient } from '../util/user.types';
 
 @Controller('user')
 export class UserController {
@@ -23,12 +27,15 @@ export class UserController {
     return this.userService.createUser(userDto);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get()
   public async getUsers(
+    @Request() req,
     @Query('page') page: number,
     @Query('limit') limit: number,
     @Query('name') name?: string,
     @Query('role') role?: string,
+    @Query('email') email?: string,
     @Query('minReputation') minReputation?: number,
   ): Promise<{
     data: User[];
@@ -36,7 +43,17 @@ export class UserController {
     page: number;
     totalPages: number;
   }> {
-    return this.userService.findAll(page, limit, { name, role, minReputation });
+    const user: UserToClient = req.user;
+    if (user.role === ROLE_1) {
+      return this.userService.findAll(page, limit, {
+        name,
+        role,
+        email,
+        minReputation,
+      });
+    } else {
+      throw new HttpException('Unauthorized', HttpStatus.UNAUTHORIZED);
+    }
   }
 
   @UseGuards(JwtAuthGuard)
