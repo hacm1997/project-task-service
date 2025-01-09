@@ -1,0 +1,492 @@
+{
+	"info": {
+		"_postman_id": "ba53281c-cb31-4ef2-9d7f-2fa777dd31ec",
+		"name": "Project-Task service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3531807",
+		"_collection_link": "https://speeding-crater-138632.postman.co/workspace/Safe-Routes~96b03ede-e851-44ee-aff4-6a9d09b73c02/collection/3531807-ba53281c-cb31-4ef2-9d7f-2fa777dd31ec?action=share&source=collection_link&creator=3531807"
+	},
+	"item": [
+		{
+			"name": "Tasks",
+			"item": [
+				{
+					"name": "get task by projectId",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1aXNsdW5hMzM4QGdtYWlsLmNvbSIsIm5hbWUiOiJMdWlzIEx1bmEiLCJyb2xlIjoic3RhbmRhcmQgdXNlciIsImRldGFpbHMiOnt9LCJyZXB1dGF0aW9uUG9pbnRzIjowLCJ1c2VybmFtZSI6Ikx1Y2hvS2VhIiwiaWQiOiI2Nzc5YzA0ZWFiNTRmNTM5OTM1NjEzNjIiLCJpYXQiOjE3MzYwNDU0NzUsImV4cCI6MTczNjA0OTA3NX0.gGmf3PAmMHWzF46vE3tg1PRlacxW0IugQkpi4qm2FRA",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/task/6779fed04152d0d5c36462b9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"task",
+								"6779fed04152d0d5c36462b9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update task",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1aXNsdW5hMzM4QGdtYWlsLmNvbSIsIm5hbWUiOiJMdWlzIEx1bmEiLCJyb2xlIjoic3RhbmRhcmQgdXNlciIsImRldGFpbHMiOnt9LCJyZXB1dGF0aW9uUG9pbnRzIjowLCJ1c2VybmFtZSI6Ikx1Y2hvS2VhIiwiaWQiOiI2Nzc5YzA0ZWFiNTRmNTM5OTM1NjEzNjIiLCJpYXQiOjE3MzYwNDU0NzUsImV4cCI6MTczNjA0OTA3NX0.gGmf3PAmMHWzF46vE3tg1PRlacxW0IugQkpi4qm2FRA",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"description\": \"Task Description Number One (1)\",\n    \"status\": \"in-progress\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/task/677b1eb5f0bc39ba0c21d88a",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"task",
+								"677b1eb5f0bc39ba0c21d88a"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Projects",
+			"item": [
+				{
+					"name": "create project",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1aXNsdW5hMzM4QGdtYWlsLmNvbSIsIm5hbWUiOiJMdWlzIEx1bmEiLCJyb2xlIjoic3RhbmRhcmQgdXNlciIsImRldGFpbHMiOnt9LCJyZXB1dGF0aW9uUG9pbnRzIjowLCJ1c2VybmFtZSI6Ikx1Y2hvS2VhIiwiaWQiOiI2Nzc5YzA0ZWFiNTRmNTM5OTM1NjEzNjIiLCJpYXQiOjE3MzYwNDU0NzUsImV4cCI6MTczNjA0OTA3NX0.gGmf3PAmMHWzF46vE3tg1PRlacxW0IugQkpi4qm2FRA",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Project Number 2\",\n    \"description\": \"Description of project 2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/project",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"project"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update project",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1aXNsdW5hMzM4QGdtYWlsLmNvbSIsIm5hbWUiOiJMdWlzIEx1bmEiLCJyb2xlIjoic3RhbmRhcmQgdXNlciIsImRldGFpbHMiOnt9LCJyZXB1dGF0aW9uUG9pbnRzIjowLCJ1c2VybmFtZSI6Ikx1Y2hvS2VhIiwiaWQiOiI2Nzc5YzA0ZWFiNTRmNTM5OTM1NjEzNjIiLCJpYXQiOjE3MzYwNDU0NzUsImV4cCI6MTczNjA0OTA3NX0.gGmf3PAmMHWzF46vE3tg1PRlacxW0IugQkpi4qm2FRA",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Project Number 2\",\n    \"description\": \"Description of project 2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/project/6779ff6f1c16a20ff2602645",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"project",
+								"6779ff6f1c16a20ff2602645"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all projects",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1aXNsdW5hMzM4QGdtYWlsLmNvbSIsIm5hbWUiOiJMdWlzIEx1bmEiLCJyb2xlIjoic3RhbmRhcmQgdXNlciIsImRldGFpbHMiOnt9LCJyZXB1dGF0aW9uUG9pbnRzIjowLCJ1c2VybmFtZSI6Ikx1Y2hvS2VhIiwiaWQiOiI2Nzc5YzA0ZWFiNTRmNTM5OTM1NjEzNjIiLCJpYXQiOjE3MzYwNDU0NzUsImV4cCI6MTczNjA0OTA3NX0.gGmf3PAmMHWzF46vE3tg1PRlacxW0IugQkpi4qm2FRA",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/project?limit=10&page=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"project"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "name",
+									"value": "Project Number 2",
+									"disabled": true
+								},
+								{
+									"key": "description",
+									"value": "Description of project 1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get projects by ID",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1aXNsdW5hMzM4QGdtYWlsLmNvbSIsIm5hbWUiOiJMdWlzIEx1bmEiLCJyb2xlIjoic3RhbmRhcmQgdXNlciIsImRldGFpbHMiOnt9LCJyZXB1dGF0aW9uUG9pbnRzIjowLCJ1c2VybmFtZSI6Ikx1Y2hvS2VhIiwiaWQiOiI2Nzc5YzA0ZWFiNTRmNTM5OTM1NjEzNjIiLCJpYXQiOjE3MzYwNDU0NzUsImV4cCI6MTczNjA0OTA3NX0.gGmf3PAmMHWzF46vE3tg1PRlacxW0IugQkpi4qm2FRA",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/project/677b1eb5f0bc39ba0c21d88a",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"project",
+								"677b1eb5f0bc39ba0c21d88a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add collaborators",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1aXNsdW5hMzM4QGdtYWlsLmNvbSIsIm5hbWUiOiJMdWlzIEx1bmEiLCJyb2xlIjoic3RhbmRhcmQgdXNlciIsImRldGFpbHMiOnt9LCJyZXB1dGF0aW9uUG9pbnRzIjowLCJ1c2VybmFtZSI6Ikx1Y2hvS2VhIiwiaWQiOiI2Nzc5YzA0ZWFiNTRmNTM5OTM1NjEzNjIiLCJpYXQiOjE3MzYwNDU0NzUsImV4cCI6MTczNjA0OTA3NX0.gGmf3PAmMHWzF46vE3tg1PRlacxW0IugQkpi4qm2FRA",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"projectId\": \"677b1eb5f0bc39ba0c21d88a\",\n    \"collaboratorId\": [\"6779c04eab54f53993561362\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/project/collaborators",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"project",
+								"collaborators"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove collaborators",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1aXNsdW5hMzM4QGdtYWlsLmNvbSIsIm5hbWUiOiJMdWlzIEx1bmEiLCJyb2xlIjoic3RhbmRhcmQgdXNlciIsImRldGFpbHMiOnt9LCJyZXB1dGF0aW9uUG9pbnRzIjowLCJ1c2VybmFtZSI6Ikx1Y2hvS2VhIiwiaWQiOiI2Nzc5YzA0ZWFiNTRmNTM5OTM1NjEzNjIiLCJpYXQiOjE3MzYwNDU0NzUsImV4cCI6MTczNjA0OTA3NX0.gGmf3PAmMHWzF46vE3tg1PRlacxW0IugQkpi4qm2FRA",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"projectId\": \"6779fed04152d0d5c36462b9\",\n    \"collaboratorId\": [\"677a008c09c2e81f032e0b2a\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/project/collaborators/remove/6779fed04152d0d5c36462b9/677a008c09c2e81f032e0b2a",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"project",
+								"collaborators",
+								"remove",
+								"6779fed04152d0d5c36462b9",
+								"677a008c09c2e81f032e0b2a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add task to project",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1aXNsdW5hMzM4QGdtYWlsLmNvbSIsIm5hbWUiOiJMdWlzIEx1bmEiLCJyb2xlIjoic3RhbmRhcmQgdXNlciIsImRldGFpbHMiOnt9LCJyZXB1dGF0aW9uUG9pbnRzIjowLCJ1c2VybmFtZSI6Ikx1Y2hvS2VhIiwiaWQiOiI2Nzc5YzA0ZWFiNTRmNTM5OTM1NjEzNjIiLCJpYXQiOjE3MzYwNDU0NzUsImV4cCI6MTczNjA0OTA3NX0.gGmf3PAmMHWzF46vE3tg1PRlacxW0IugQkpi4qm2FRA",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Task number 4.1.\",\n    \"description\": \"Task Description 4.1\",\n    \"dueDate\": \"2025-01-16\",\n    \"status\": \"completed\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/project/tasks/677ebf0363f6b17035fd20d1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"project",
+								"tasks",
+								"677ebf0363f6b17035fd20d1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove task from project",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1aXNsdW5hMzM4QGdtYWlsLmNvbSIsIm5hbWUiOiJMdWlzIEx1bmEiLCJyb2xlIjoic3RhbmRhcmQgdXNlciIsImRldGFpbHMiOnt9LCJyZXB1dGF0aW9uUG9pbnRzIjowLCJ1c2VybmFtZSI6Ikx1Y2hvS2VhIiwiaWQiOiI2Nzc5YzA0ZWFiNTRmNTM5OTM1NjEzNjIiLCJpYXQiOjE3MzYwNDU0NzUsImV4cCI6MTczNjA0OTA3NX0.gGmf3PAmMHWzF46vE3tg1PRlacxW0IugQkpi4qm2FRA",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Task number two\",\n    \"description\": \"Task Description two\",\n    \"dueDate\": \"2025-01-22\",\n    \"status\": \"in-progress\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/project/tasks/remove/6779fed04152d0d5c36462b9/677afb362f78e3d24b371a32",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"project",
+								"tasks",
+								"remove",
+								"6779fed04152d0d5c36462b9",
+								"677afb362f78e3d24b371a32"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete project",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1aXNsdW5hMzM4QGdtYWlsLmNvbSIsIm5hbWUiOiJMdWlzIEx1bmEiLCJyb2xlIjoic3RhbmRhcmQgdXNlciIsImRldGFpbHMiOnt9LCJyZXB1dGF0aW9uUG9pbnRzIjowLCJ1c2VybmFtZSI6Ikx1Y2hvS2VhIiwiaWQiOiI2Nzc5YzA0ZWFiNTRmNTM5OTM1NjEzNjIiLCJpYXQiOjE3MzYwNDU0NzUsImV4cCI6MTczNjA0OTA3NX0.gGmf3PAmMHWzF46vE3tg1PRlacxW0IugQkpi4qm2FRA",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Project Number 2\",\n    \"description\": \"Description of project 2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/project/677de9af1fecff5afdfba7d0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"project",
+								"677de9af1fecff5afdfba7d0"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Comments",
+			"item": [
+				{
+					"name": "create comment",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1aXNsdW5hMzM4QGdtYWlsLmNvbSIsIm5hbWUiOiJMdWlzIEx1bmEiLCJyb2xlIjoic3RhbmRhcmQgdXNlciIsImRldGFpbHMiOnt9LCJyZXB1dGF0aW9uUG9pbnRzIjowLCJ1c2VybmFtZSI6Ikx1Y2hvS2VhIiwiaWQiOiI2Nzc5YzA0ZWFiNTRmNTM5OTM1NjEzNjIiLCJpYXQiOjE3MzYwNDU0NzUsImV4cCI6MTczNjA0OTA3NX0.gGmf3PAmMHWzF46vE3tg1PRlacxW0IugQkpi4qm2FRA",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"content\": \"La tarea esta en desarrollo\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/comment/677b1fbbf0bc39ba0c21d896",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"comment",
+								"677b1fbbf0bc39ba0c21d896"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
