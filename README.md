@@ -1,65 +1,65 @@
 # Project Task Management - Backend Services
 
-Movies App es una aplicación web que permite a los usuarios buscar películas, ver detalles de estas y guardar sus películas favoritas. La información sobre las películas proviene de la API **The Movie Database (TMDb)**.
+Project task management microservices
 
-## Tecnologías utilizadas
+## Technologies Used
 
-- **Nest.js**: Framework para el desarrollo de aplicaciones Backend.
-- **MongoDB**: Base de datos no relacional para almacenamiento de la información.
-- **TypeScript**: Superset de JavaScript que permite una mejor experiencia de desarrollo con tipado estático.
-- **Patron de diseño Repository**: Patrón de diseño que se encarga de dividir el proceso, en este caso la interacción con la base de datos de manera independiente para que no afecte en un futuro si se desea cambiar de base de datos.
-- **JWT Token**: Para cifrado y autenticación.
-- **UseGuards**: Se utiliza para aplicar guards (guardias) a rutas, controladores o métodos específicos. Los guardias son clases que implementan la interfaz CanActivate y sirven para controlar el acceso a las rutas en función de una lógica específica, como la autenticación o autorización..
+- **Nest.js**: Framework for Backend application development.
+- **MongoDB**: Non-relational database for storing information.
+- **TypeScript**: Superset of JavaScript that allows for a better development experience with static typing.
+- **Repository Design Pattern**: A design pattern that separates the process, in this case, the interaction with the database, so it can be easily changed in the future if needed.
+- **JWT Token**: Used for encryption and authentication.
+- **UseGuards**: Used to apply guards to routes, controllers, or specific methods. Guards are classes that implement the CanActivate interface and serve to control access to routes based on specific logic, such as authentication or authorization.
 
-## Estructura del Proyecto
+## Project Structure
 
-La estructura de carpetas del proyecto es la siguiente:
+The project folder structure is as follows:
 
 📁 root/
 
-├── 📁 Modules/ # Modulos (microservicios separados) de cada cada servicio (Auth, Projects, Task, Comments)
+├── 📁 Modules/ # Modules (separated microservices) for each service (Auth, Projects, Task, Comments)
 
-├── ├── 📁 controller/ # Controlador del microservicio (endpoints)
+├── ├── 📁 controller/ # Controller of the microservice (endpoints)
 
-├── ├── 📁 data/ # Contiene el repositorio que hace la interacción con MongoDB
+├── ├── 📁 data/ # Contains the repository that interacts with MongoDB
 
-├── ├── 📁 service/ # Se encarga de la interacción con el repositorio
+├── ├── 📁 service/ # Handles interaction with the repository
 
-├── ├── 📁 utils/ # Contiene las variables de entorno necesarias
+├── ├── 📁 utils/ # Contains necessary environment variables
 
-├── 📁 src/ # Contenido general del servicio en general
+├── 📁 src/ # General content of the service
 
-├── ├── 📁 common/ # Contiene los schemas para MongoDB
+├── ├── 📁 common/ # Contains schemas for MongoDB
 
-├── ├── 📁 envs/ # Contiene las variables de entorno (solo local)
+├── ├── 📁 envs/ # Contains environment variables (local only)
 
-├── ├── 📁 utils/ # Contiene métodos/clases para ser usadas en todo el proyecto
+├── ├── 📁 utils/ # Contains methods/classes to be used throughout the project
 
-## Instalación y Configuración
+## Installation and Configuration
 
-Sigue estos pasos para instalar y ejecutar el proyecto en tu máquina local:
+Follow these steps to install and run the project on your local machine:
 
-1. **Instalar y configurar MongoDB (windows)**:
+1. **Install and configure MongoDB (Windows)**:
 
-   [MongoDB para windows](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-windows/)
+   [MongoDB for Windows](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-windows/)
 
-   [MongoDB para Linux](https://www.mongodb.com/docs/manual/administration/install-on-linux/)
+   [MongoDB for Linux](https://www.mongodb.com/docs/manual/administration/install-on-linux/)
 
-### MongoDB debe estar iniciado localmente en el puerto 27017 y el nombre de la tabla 'projects-taks'
+### MongoDB must be running locally on port 27017 with the database name 'projects-tasks'
 
-2. **Clona el repositorio**:
+2. **Clone the repository**:
 
    git clone git@github.com:hacm1997/project-task-service.git
 
-3. **Entra la raiz directorio**:
+3. **Navigate to the root directory**:
 
    cd project-task-service
 
-4. **Instala las dependencias**:
+4. **Install dependencies**:
 
    npm install
 
-5. **Iniciar el servicio en modo desarollo**:
+5. **Start the service in development mode**:
 
    npm run dev
 
