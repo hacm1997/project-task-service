@@ -27,17 +27,22 @@ export class TaskService {
     }
   }
 
-  async getTaskById(taskId: string): Promise<TaskBase | null> {
+  async getAllTasks(title?: string): Promise<TaskDocument[]> {
+    const tasks = await this.taskRepository.findAll(title);
+    return tasks;
+  }
+
+  async getTaskById(taskId: string): Promise<TaskDocument | null> {
     const task = await this.taskRepository.findById(taskId);
     if (!task) return null;
-    return this.mapToTaskBase(task);
+    return task;
   }
 
   async getTaskByProjectId(
     projectId: string,
-    userId: string,
+    title?: string,
   ): Promise<TaskDocument[] | null> {
-    const task = await this.taskRepository.findByProjectId(projectId, userId);
+    const task = await this.taskRepository.findByProjectId(projectId, title);
     if (task.length === 0) {
       throw new HttpException('Tasks not found', HttpStatus.BAD_REQUEST);
     }
@@ -55,6 +60,7 @@ export class TaskService {
     description?: string,
     dueDate?: Date,
     status?: string,
+    assignedTo?: string,
   ): Promise<Task> {
     const updateTask = await this.taskRepository.updateTask(
       taskId,
@@ -62,6 +68,7 @@ export class TaskService {
       description,
       dueDate,
       status,
+      assignedTo,
     );
     return updateTask;
   }

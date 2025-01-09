@@ -27,6 +27,15 @@ export class UserService {
     }
   }
 
+  async findById(id: string): Promise<UserDocument | null> {
+    try {
+      return await this.userRepository.findById(id);
+    } catch (error) {
+      console.error('Error finding user by id => ', error);
+      throw new NotFoundException('Error to get user');
+    }
+  }
+
   async findByEmail(email: string): Promise<UserDocument | null> {
     try {
       return await this.userRepository.findByEmail(email);
@@ -77,7 +86,7 @@ export class UserService {
       });
       return findUsers;
     } else {
-      throw new NotFoundException('No users found');
+      return { data: [], total: null, page: null, totalPages: null };
     }
   }
 

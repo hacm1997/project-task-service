@@ -3,6 +3,8 @@ import { CommentService } from '../service/comment.service';
 import {
   Body,
   Controller,
+  Delete,
+  Get,
   Param,
   Post,
   Request,
@@ -11,6 +13,8 @@ import {
 import { CommentDto } from '../util/commentDto.model';
 import { CommentBase } from '../service/comment.base';
 import { UserToClient } from 'Modules/Users/util/user.types';
+import { CommentDocument } from 'src/common/mongodb/schemas/comments.schema';
+import { GeneralResponse } from 'src/utils/types';
 
 @UseGuards(JwtAuthGuard)
 @Controller('comment')
@@ -25,5 +29,19 @@ export class CommentController {
   ): Promise<CommentBase> {
     const user: UserToClient = req.user;
     return this.commentService.createComment(user, taskId, comment);
+  }
+
+  @Get('/:taskId')
+  async getTaskByProjectId(
+    @Param('taskId') taskId: string,
+  ): Promise<CommentDocument[]> {
+    return this.commentService.getCommentsByTaskId(taskId);
+  }
+
+  @Delete('/:commentId')
+  async deleteComment(
+    @Param('commentId') commentId: string,
+  ): Promise<GeneralResponse> {
+    return this.commentService.deleteComment(commentId);
   }
 }

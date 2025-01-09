@@ -2,7 +2,6 @@ import {
   Body,
   Controller,
   Get,
-  HttpException,
   HttpStatus,
   Param,
   Post,
@@ -13,7 +12,7 @@ import {
 } from '@nestjs/common';
 import { UserService } from '../service/user.service';
 import { UserModelDto, UserPreferencesDto } from '../util/user.modelDto';
-import { User } from 'src/common/mongodb/schemas/user.shcema';
+import { User, UserDocument } from 'src/common/mongodb/schemas/user.shcema';
 import { JwtAuthGuard } from 'Modules/Auth/utils/jwt-auth.guard';
 import { ROLE_1 } from 'src/common/constants/const';
 import { UserToClient } from '../util/user.types';
@@ -25,6 +24,14 @@ export class UserController {
   @Post()
   public async createUser(@Body() userDto: UserModelDto): Promise<User> {
     return this.userService.createUser(userDto);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('/:id')
+  public async getUserById(
+    @Param('id') id: string,
+  ): Promise<UserDocument | null> {
+    return this.userService.findById(id);
   }
 
   @UseGuards(JwtAuthGuard)
@@ -52,7 +59,7 @@ export class UserController {
         minReputation,
       });
     } else {
-      throw new HttpException('Unauthorized', HttpStatus.UNAUTHORIZED);
+      return { data: [], total: null, page: null, totalPages: null };
     }
   }
 

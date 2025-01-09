@@ -39,11 +39,10 @@ export class UserRepository {
     totalPages: number;
   }> {
     const { name, role, email, minReputation } = filters;
-
     const query: UserQuery = {};
     if (name) query.name = new RegExp(name, 'i'); // ignora mayúsculas o minísculoas
     if (role) query.role = new RegExp(role, 'i');
-    if (email) query.email = new RegExp(email, 'i');
+    if (email && email !== 'undefined') query.email = new RegExp(email, 'i');
     if (minReputation) query.reputationPoints = { $gte: minReputation };
 
     const total = await this.userModel.countDocuments(query).exec();

@@ -83,7 +83,7 @@ export class ProjectController {
   }
 
   @Get('/:id')
-  async getProjectById(@Param('id') id: string): Promise<ProjectBase> {
+  async getProjectById(@Param('id') id: string): Promise<ProjectDocument> {
     return this.projectService.getProjectById(id);
   }
 
@@ -146,7 +146,7 @@ export class ProjectController {
       const buildTask: TaskDto = {
         ...taskData,
         project: projectId,
-        assignedTo: user.userId.toString(),
+        assignedTo: taskData.assignedTo.toString(),
       };
       return this.projectService.addTask(projectId, buildTask);
     } else {

@@ -61,7 +61,15 @@ export class ProjectRepository {
   }
 
   async findById(_id: string): Promise<ProjectDocument | null> {
-    return this.projectModel.findOne({ _id }).exec();
+    // return this.projectModel
+    //   .findOne({ _id })
+    //   .populate('collaborators', '_id', 'name')
+    //   .exec();
+    const project = await this.projectModel
+      .findOne({ _id })
+      .populate('collaborators', 'name')
+      .exec();
+    return project;
   }
 
   // Adding collaborators

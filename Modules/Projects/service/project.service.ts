@@ -75,10 +75,10 @@ export class ProjectService {
   }
 
   // Método para obtener un proyecto por su ID
-  async getProjectById(id: string): Promise<ProjectBase | null> {
+  async getProjectById(id: string): Promise<ProjectDocument | null> {
     const project = await this.projectRepository.findById(id);
     if (!project) return null;
-    return this.mapToProjectBase(project);
+    return project;
   }
 
   async addCollaborator(
@@ -136,6 +136,11 @@ export class ProjectService {
     taskId: string,
   ): Promise<GeneralResponse> {
     const project = await this.getProjectById(projectId);
+    try {
+      await this.taskService.removerById(taskId);
+    } catch (err) {
+      console.log('Task not deleted', err);
+    }
     if (!project) {
       throw new HttpException('Project not found', HttpStatus.NOT_FOUND);
     }
@@ -172,7 +177,7 @@ export class ProjectService {
         const prj = await this.projectRepository.deleteProject(projectId);
         if (prj) {
           try {
-            project.getTasks.forEach(async (task) => {
+            project.tasks.forEach(async (task) => {
               await this.taskService.removerById(task);
             });
           } catch (error) {
@@ -195,13 +200,13 @@ export class ProjectService {
     }
   }
 
-  private mapToProjectBase(project: ProjectDocument): ProjectBase {
-    return new ProjectBase(
-      project.name,
-      project.description,
-      project.owner.toString(),
-      project.collaborators.map((collaborator) => collaborator.toString()),
-      project.tasks.map((task) => task.toString()),
-    );
-  }
+  // private mapToProjectBase(project: ProjectDocument): ProjectBase {
+  //   return new ProjectBase(
+  //     project.name,
+  //     project.description,
+  //     project.owner.toString(),
+  //     project.collaborators.map((collaborator) => collaborator.toString()),
+  //     project.tasks.map((task) => task.toString()),
+  //   );
+  // }
 }

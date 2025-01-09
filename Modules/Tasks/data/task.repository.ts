@@ -4,6 +4,7 @@ import { Task, TaskDocument } from 'src/common/mongodb/schemas/task.shcema';
 import { User, UserDocument } from 'src/common/mongodb/schemas/user.shcema';
 import { TaskBase } from '../service/task.base';
 import { HttpException, HttpStatus, NotFoundException } from '@nestjs/common';
+import { TaskQuery } from '../util/task.types';
 
 export class TaskRepository {
   constructor(
@@ -16,8 +17,10 @@ export class TaskRepository {
     return createTask.save();
   }
 
-  async findAll(): Promise<TaskDocument[]> {
-    return this.taskModel.find().exec();
+  async findAll(title?: string): Promise<TaskDocument[]> {
+    const query: TaskQuery = {};
+    if (title) query.title = new RegExp(title, 'i');
+    return this.taskModel.find(query).exec();
   }
 
   async findById(_id: string): Promise<TaskDocument | null> {
@@ -26,9 +29,15 @@ export class TaskRepository {
 
   async findByProjectId(
     project: string,
-    assignedTo: string,
+    title?: string,
   ): Promise<TaskDocument[]> {
-    return this.taskModel.find({ project, assignedTo }).exec();
+    const query: TaskQuery = { project };
+
+    if (title && title !== 'undefined') {
+      query.title = new RegExp(title, 'i');
+    }
+
+    return this.taskModel.find(query).sort({ createdAt: -1 }).exec();
   }
 
   async deleteById(_id: string): Promise<boolean> {
@@ -71,6 +80,7 @@ export class TaskRepository {
     description: string,
     dueDate: Date,
     status: string,
+    assignedTo: string,
   ): Promise<Task> {
     const task = await this.taskModel.findById(taskId).exec();
     if (!task) {
@@ -81,6 +91,7 @@ export class TaskRepository {
     if (description) task.description = description;
     if (dueDate) task.dueDate = dueDate;
     if (status) task.status = status;
+    if (assignedTo) task.assignedTo = assignedTo;
 
     task.updatedAt = new Date();
     return task.save();
