@@ -1,3 +1,9 @@
+## For user creation, use the Postman collection:
+
+**Create a user with "admin" role**
+
+**Create a user with "team member" role**
+
 # Project Task Management - Backend Services
 
 Project task management microservices
